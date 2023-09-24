@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 
-// connecting mongoose to its default server and ecommerceDB
-mongoose.connect('mongodb+srv://soumyasri2245:Soumya22%4034@cluster0.u2ywt3o.mongodb.net/?retryWrites=true&w=majority', {
-    useNewUrlParser: true
+// Specify the URI for your local MongoDB instance
+const localMongoURI = 'mongodb://localhost:27017/ecommerceDB'; // Replace with your database name
+
+// Connect to the local MongoDB instance
+mongoose.connect(localMongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true, // Add this option for the latest version of Mongoose
 });
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, "Error connecting to MongoDB"));
+db.on('error', console.error.bind(console, 'Error connecting to MongoDB'));
 
-db.once('open', function(){
+db.once('open', function () {
     console.log('Connected to Database :: MongoDB');
 });
 
